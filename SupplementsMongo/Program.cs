@@ -30,6 +30,6 @@
 //         break;
 // }
 
-ProviderEditors.Update();
+ProviderEditors.Add();
 
 return;

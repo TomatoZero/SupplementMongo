@@ -41,8 +41,37 @@ public static class ProviderEditors
 
         if (newName != "-") provider.Name = newName;
         if (newRegistrationCountry != "-") provider.RegistrationCountry = newRegistrationCountry;
-        
+
         _repository.Update(provider);
+    }
+
+    public static void Add()
+    {
+        while (true)
+        {
+            Console.WriteLine($"New provider:\n");
+
+            Console.WriteLine("Name:");
+            var newName = Console.ReadLine();
+            Console.WriteLine("RegistrationCountry:");
+            var newRegistrationCountry = Console.ReadLine();
+
+            if (IsInputPossible(newName, newRegistrationCountry))
+            {
+                
+                var provider = new Provider
+                {
+                    Name = newName,
+                    RegistrationCountry = newRegistrationCountry
+                };
+
+                _repository.Add(provider);
+                return;
+            }
+            
+            Console.Clear();
+            Console.WriteLine("Input error. Try again");
+        }
     }
 
     private static Provider SelectProvider()
@@ -61,5 +90,11 @@ public static class ProviderEditors
             Console.Clear();
             Console.WriteLine($"Error: Wrong Input. Select again");
         }
+    }
+
+    private static bool IsInputPossible(string name, string country)
+    {
+        return !string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name) && !string.IsNullOrEmpty(country) &&
+               !string.IsNullOrWhiteSpace(country);
     }
 }
