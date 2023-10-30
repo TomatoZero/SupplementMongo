@@ -13,85 +13,29 @@ public static class ProviderEditors
         _repository = new ProviderRepository();
     }
 
-    public static void PrintTable()
+    public static List<Provider> GetTable()
     {
-        _currentProviders = _repository.GetAll().ToList();
-
-        var str = "Providers:\n";
-        foreach (var provider in _currentProviders)
-        {
-            str += $"   {provider.Name}";
-        }
-
-        Console.WriteLine(str);
+        return _repository.GetAll().ToList();
     }
 
-    public static void Update()
+    public static void Update(Provider provider, Provider newValue)
     {
-        var provider = SelectProvider();
-
-        Console.WriteLine($"Current value:\n" +
-                          $"    {provider.Name}\n" +
-                          $"    {provider.RegistrationCountry}\n");
-
-        Console.WriteLine("New Name ('-' - same):");
-        var newName = Console.ReadLine();
-        Console.WriteLine("New RegistrationCountry ('-' - same):");
-        var newRegistrationCountry = Console.ReadLine();
-
-        if (newName != "-") provider.Name = newName;
-        if (newRegistrationCountry != "-") provider.RegistrationCountry = newRegistrationCountry;
+        provider.Name = newValue.Name;
+        provider.RegistrationCountry = newValue.RegistrationCountry;
 
         _repository.Update(provider);
     }
 
-    public static void Add()
+    public static void Add(Provider provider)
     {
-        while (true)
-        {
-            Console.WriteLine($"New provider:\n");
-
-            Console.WriteLine("Name:");
-            var newName = Console.ReadLine();
-            Console.WriteLine("RegistrationCountry:");
-            var newRegistrationCountry = Console.ReadLine();
-
-            if (IsInputPossible(newName, newRegistrationCountry))
-            {
-                
-                var provider = new Provider
-                {
-                    Name = newName,
-                    RegistrationCountry = newRegistrationCountry
-                };
-
-                _repository.Add(provider);
-                return;
-            }
-            
-            Console.Clear();
-            Console.WriteLine("Input error. Try again");
-        }
+        _repository.Add(provider);
     }
 
-    private static Provider SelectProvider()
+    public static void Remove(Provider provider)
     {
-        while (true)
-        {
-            PrintTable();
-
-            var inputProvider = Console.ReadLine();
-
-            foreach (var provider in _currentProviders)
-            {
-                if (inputProvider == provider.Name) return provider;
-            }
-
-            Console.Clear();
-            Console.WriteLine($"Error: Wrong Input. Select again");
-        }
+        _repository.Delete(provider.Id);
     }
-
+    
     private static bool IsInputPossible(string name, string country)
     {
         return !string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name) && !string.IsNullOrEmpty(country) &&
