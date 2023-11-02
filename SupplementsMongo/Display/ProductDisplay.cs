@@ -66,7 +66,6 @@ public static class ProductDisplay
 
             Console.WriteLine("Name:");
             _name = Console.ReadLine();
-            Console.WriteLine("Select New Provider:");
             var providerId = ProviderDisplay.GetProviderFromList().Id;
 
             Console.WriteLine("ManufacturingDate ('-' - same):");

@@ -23,13 +23,8 @@ public class ProviderDisplay
     public static Provider GetProviderFromList()
     {
         Console.WriteLine($"Select provider:\n");
-
-        PrintTable();
-
-        Console.WriteLine("Id:");
-        var id = Int32.Parse(Console.ReadLine().Trim());
-
-        return ProviderEditors.GetById(id);
+        var provider = SelectProvider();
+        return provider;
     }
 
     public static void Update()
