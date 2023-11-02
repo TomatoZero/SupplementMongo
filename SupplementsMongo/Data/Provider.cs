@@ -13,4 +13,10 @@ public partial class Provider
     public string? RegistrationCountry { get; set; } = null!;
 
     [BsonIgnore] public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public override string ToString()
+    {
+        return $"Name: {Name}\n" +
+               $"RegistrationCountry: {RegistrationCountry}";
+    }
 }

@@ -1,12 +1,11 @@
-﻿using NutritionalSupplements.Data;
+﻿using MongoDB.Bson;
+using NutritionalSupplements.Data;
 
 namespace SupplementsMongo.Editors;
 
 public static class ProviderEditors
 {
     private static ProviderRepository _repository;
-
-    private static List<Provider> _currentProviders;
 
     static ProviderEditors()
     {
@@ -18,6 +17,16 @@ public static class ProviderEditors
         return _repository.GetAll().ToList();
     }
 
+    public static Provider GetById(int id)
+    {
+        return _repository.GetById(id);
+    }
+    
+    public static Provider GetById(ObjectId id)
+    {
+        return _repository.GetById(id);
+    }
+    
     public static void Update(Provider provider, Provider newValue)
     {
         provider.Name = newValue.Name;
@@ -34,11 +43,5 @@ public static class ProviderEditors
     public static void Remove(Provider provider)
     {
         _repository.Delete(provider.Id);
-    }
-    
-    private static bool IsInputPossible(string name, string country)
-    {
-        return !string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name) && !string.IsNullOrEmpty(country) &&
-               !string.IsNullOrWhiteSpace(country);
     }
 }

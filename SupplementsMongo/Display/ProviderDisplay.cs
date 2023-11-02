@@ -6,7 +6,7 @@ namespace SupplementsMongo.Display;
 public class ProviderDisplay
 {
     private static List<Provider> _currentProviders;
-    
+
     public static void PrintTable()
     {
         _currentProviders = ProviderEditors.GetTable();
@@ -18,6 +18,18 @@ public class ProviderDisplay
         }
 
         Console.WriteLine(str);
+    }
+
+    public static Provider GetProviderFromList()
+    {
+        Console.WriteLine($"Select provider:\n");
+
+        PrintTable();
+
+        Console.WriteLine("Id:");
+        var id = Int32.Parse(Console.ReadLine().Trim());
+
+        return ProviderEditors.GetById(id);
     }
 
     public static void Update()
@@ -41,7 +53,7 @@ public class ProviderDisplay
             Name = newName,
             RegistrationCountry = newRegistrationCountry
         };
-        
+
         ProviderEditors.Update(provider, newProviderValue);
     }
 
@@ -58,17 +70,16 @@ public class ProviderDisplay
 
             if (IsInputPossible(newName, newRegistrationCountry))
             {
-                
                 var provider = new Provider
                 {
                     Name = newName,
                     RegistrationCountry = newRegistrationCountry
                 };
-                
+
                 ProviderEditors.Add(provider);
                 return;
             }
-            
+
             Console.Clear();
             Console.WriteLine("Input error. Try again");
         }
@@ -79,7 +90,7 @@ public class ProviderDisplay
         var provider = SelectProvider();
         ProviderEditors.Remove(provider);
     }
-    
+
     private static Provider SelectProvider()
     {
         while (true)

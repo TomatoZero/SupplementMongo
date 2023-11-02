@@ -13,6 +13,6 @@ public static class MongoClient
     static MongoClient()
     {
         _mongoClient = new MongoDB.Driver.MongoClient("mongodb://localhost:27017");
-        _database = _mongoClient.GetDatabase("NutritionalSupplements");
+        _database = _mongoClient.GetDatabase("NutritionalSupplement");
     }
 }

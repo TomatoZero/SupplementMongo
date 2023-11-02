@@ -1,4 +1,4 @@
-﻿using SupplementsMongo.Editors;
+﻿using SupplementsMongo.Display;
 
 // Console.WriteLine("Choose Table (Number):\n" +
 //                   " 1. Provider\n" +
@@ -30,5 +30,6 @@
 //         break;
 // }
 
+ProviderDisplay.Add();
 
 return;
