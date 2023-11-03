@@ -3,21 +3,21 @@ using SupplementsMongo.Editors;
 
 namespace SupplementsMongo.Display;
 
-public class PurposeDisplay
+public class HealthEffectDisplay
 {
-    private static List<Purpose> _current;
+    private static List<HealthEffect> _current;
 
-    private static string _name;
+    private static string _category;
     private static string _description;
     
     public static void PrintTable()
     {
-        _current = PurposeEditor.GetTable();
+        _current = HealthEffectEditor.GetTable();
 
-        var str = "Purposes:\n";
+        var str = "Health effect:\n";
         foreach (var purpose in _current)
         {
-            str += $"   {purpose.Name}\n";
+            str += $"   {purpose.Category}\n";
         }
 
         Console.WriteLine(str);
@@ -25,43 +25,43 @@ public class PurposeDisplay
     
     public static void Update()
     {
-        var purpose = SelectProduct();
+        var healthEffect = SelectHealthEffect();
 
         Console.WriteLine($"Current value:\n" +
-                          $"    {purpose.Name}\n" +
-                          $"    {purpose.Description}");
+                          $"    {healthEffect.Category}\n" +
+                          $"    {healthEffect.Description}");
 
-        Console.WriteLine("New Name ('-' - same):");
-        var newName = Console.ReadLine();
+        Console.WriteLine("New Category ('-' - same):");
+        _category = Console.ReadLine();
         Console.WriteLine("Description ('-' - same):");
-        var description = Console.ReadLine().Trim();
+        _description = Console.ReadLine().Trim();
         
-        if (newName != "-") purpose.Name = newName;
-        if (description != "-") purpose.Description = description;
+        if (_category != "-") healthEffect.Category = _category;
+        if (_description != "-") healthEffect.Description = _description;
         
-        PurposeEditor.Update(purpose);
+        HealthEffectEditor.Update(healthEffect);
     }
 
     public static void Add()
     {
         while (true)
         {
-            Console.WriteLine($"New purpose:\n");
+            Console.WriteLine($"New HealthEffect:\n");
 
-            Console.WriteLine("Name:");
-            _name = Console.ReadLine();
+            Console.WriteLine("Category:");
+            _category = Console.ReadLine();
             Console.WriteLine("Description:");
             _description = Console.ReadLine().Trim();
 
             if (IsInputPossible())
             {
-                var purpose = new Purpose()
+                var purpose = new HealthEffect()
                 {
-                    Name = _name,
+                    Category = _category,
                     Description = _description
                 };
                 
-                PurposeEditor.Add(purpose);
+                HealthEffectEditor.Add(purpose);
                 return;
             }
             
@@ -72,11 +72,11 @@ public class PurposeDisplay
 
     public static void Remove()
     {
-        var provider = SelectProduct();
-        PurposeEditor.Remove(provider);
+        var healthEffect = SelectHealthEffect();
+        HealthEffectEditor.Remove(healthEffect);
     }
     
-    private static Purpose SelectProduct()
+    private static HealthEffect SelectHealthEffect()
     {
         while (true)
         {
@@ -86,7 +86,7 @@ public class PurposeDisplay
 
             foreach (var provider in _current)
             {
-                if (inputProvider == provider.Name) return provider;
+                if (inputProvider == provider.Category) return provider;
             }
 
             Console.Clear();
@@ -96,7 +96,7 @@ public class PurposeDisplay
 
     private static bool IsInputPossible()
     {
-        return IsInputPossible(_name) & IsInputPossible(_description);
+        return IsInputPossible(_category) & IsInputPossible(_description);
     }
 
     private static bool IsInputPossible(string str)

@@ -18,7 +18,7 @@ public static class ProductDisplay
         var str = "Products:\n";
         foreach (var product in _currentProduct)
         {
-            str += $"   {product.Name}";
+            str += $"   {product.Name}\n";
         }
 
         Console.WriteLine(str);

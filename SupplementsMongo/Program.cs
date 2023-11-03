@@ -30,6 +30,8 @@
 //         break;
 // }
 
-PurposeDisplay.Add();
+// HealthEffectDisplay.Add();
+
+PurposeDisplay.Remove();
 
 return;

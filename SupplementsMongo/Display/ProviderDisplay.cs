@@ -14,7 +14,7 @@ public class ProviderDisplay
         var str = "Providers:\n";
         foreach (var provider in _currentProviders)
         {
-            str += $"   {provider.Name}";
+            str += $"   {provider.Name}\n";
         }
 
         Console.WriteLine(str);
