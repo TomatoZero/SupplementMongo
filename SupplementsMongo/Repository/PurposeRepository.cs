@@ -92,7 +92,12 @@ public class PurposeRepository : IPurposeRepository
     public void Delete(int id)
     {
         var targetId = ObjectId.Parse(id.ToString());
-        var filter = Builders<BsonDocument>.Filter.Eq("_id", targetId);
+        Delete(targetId);
+    }
+    
+    public void Delete(ObjectId id)
+    {
+        var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
         var result = _collection.DeleteOne(filter);
 
         if (result.DeletedCount > 0)
