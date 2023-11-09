@@ -97,25 +97,25 @@ public class HealthEffectDisplay
 
     public static List<ObjectId> SelectHealthEffectsId()
     {
-        var purposes = SelectHealthEffects();
-        return purposes.Select(purpose => purpose.Id).ToList();
+        var healthEffects = SelectHealthEffects();
+        return healthEffects.Select(effect => effect.Id).ToList();
     }
     
     public static List<ObjectId> SelectHealthEffectsIdFrom(List<HealthEffect> selectFrom)
     {
-        var purposes = SelectHealthEffectsFrom(selectFrom);
-        return purposes.Select(purpose => purpose.Id).ToList();
+        var effectsFrom = SelectHealthEffectsFrom(selectFrom);
+        return effectsFrom.Select(healthEffect => healthEffect.Id).ToList();
     }
 
     public static List<HealthEffect> SelectHealthEffects()
     {
-        PrintTable();
+        _current = HealthEffectEditor.GetTable();
         return SelectHealthEffectsFrom(_current);
     }
     
     public static List<HealthEffect> SelectHealthEffectsFrom(List<HealthEffect> selectFrom)
     {
-        var str = "Current Health effect:\n";
+        var str = "Select from:\n";
         foreach (var effect in selectFrom)
         {
             str += $"   {effect.Category}\n";

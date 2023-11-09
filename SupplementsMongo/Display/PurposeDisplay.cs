@@ -77,27 +77,45 @@ public class PurposeDisplay
         PurposeEditor.Remove(provider);
     }
 
-    public static List<ObjectId> SelectPurposeId()
+    public static List<ObjectId> SelectPurposesId()
     {
         var purposes = SelectPurposes();
         return purposes.Select(purpose => purpose.Id).ToList();
     }
 
+    public static List<ObjectId> SelectPurposeIdFrom(List<Purpose> from)
+    {
+        var purposes = SelectPurposeFrom(from);
+        return purposes.Select(purpose => purpose.Id).ToList();
+    }
+    
     public static List<Purpose> SelectPurposes()
     {
+        _current = PurposeEditor.GetTable();
+        return SelectPurposeFrom(_current);
+    }
+
+    public static List<Purpose> SelectPurposeFrom(List<Purpose> selectFrom)
+    {
+        var str = "Select from:\n";
+        foreach (var purpose in selectFrom)
+        {
+            str += $"   {purpose.Name}\n";
+        }
+        Console.WriteLine(str);
+        
         var healthEffects = new List<Purpose>();
 
-        PrintTable();
+        Console.WriteLine("Print for select (, - separator)");
+        var printedHealthEffects = Console.ReadLine().Trim().Split(',');
 
-        var printedPurposes = Console.ReadLine().Trim().Split();
-
-        foreach (var printedPurpose in printedPurposes)
+        foreach (var printedEffect in printedHealthEffects)
         {
-            foreach (var purpose in _current)
+            foreach (var healthEffect in selectFrom)
             {
-                if (printedPurpose == purpose.Name)
+                if (printedEffect == healthEffect.Name)
                 {
-                    healthEffects.Add(purpose);
+                    healthEffects.Add(healthEffect);
                     break;
                 }
             }

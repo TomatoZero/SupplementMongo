@@ -13,7 +13,7 @@ public static class ProductEditor
     
     public static List<Product> GetTable()
     {
-        return _repository.GetAll().ToList();
+        return _repository.GetAllInclude().ToList();
     }
 
     public static void Update(Product product, Product newValue)

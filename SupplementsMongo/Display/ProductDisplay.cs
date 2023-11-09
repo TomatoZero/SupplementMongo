@@ -23,6 +23,18 @@ public static class ProductDisplay
 
         Console.WriteLine(str);
     }
+
+    public static void PrintFullTable()
+    {
+        _currentProduct = ProductEditor.GetTable();
+
+        Console.WriteLine("Products");
+        foreach (var product in _currentProduct)
+        {
+            PrintValue(product);
+            Console.WriteLine("---------------------------------");
+        }
+    }
     
     public static void Update()
     {
@@ -124,5 +136,22 @@ public static class ProductDisplay
     private static bool IsInputPossible(string str)
     {
         return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+    }
+    
+    private static void PrintValue(Product product)
+    {
+        var str = $"{product.Name}\n" +
+                  $"{product.ManufacturingDate}\n" +
+                  $"{product.ExpirationDate}\n" +
+                  $"{product.Provider}\n";
+
+        str += $"Ingredients:\n";
+
+        foreach (var ingredient in product.Ingredients)
+        {
+            str += $"{ingredient}\n";
+        }
+
+        Console.WriteLine(str);
     }
 }

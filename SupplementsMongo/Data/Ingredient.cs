@@ -17,4 +17,9 @@ public partial class Ingredient
 
     [BsonIgnore]
     public List<NutritionalSupplement> NutritionalSupplements { get; set; } = new List<NutritionalSupplement>();
+
+    public override string ToString()
+    {
+        return $"{Name} {IngredientSource}";
+    }
 }

@@ -26,6 +26,18 @@ public static class NutritionalSupplementDisplay
         Console.WriteLine(str);
     }
 
+    public static void PrintFullTable()
+    {
+        _currentSupplements = NutritionalSupplementEditor.GetTableInclude();
+
+        Console.WriteLine("Supplement:");
+        foreach (var supplement in _currentSupplements)
+        {
+            PrintValue(supplement);
+            Console.WriteLine("---------------------------------");
+        }
+    }
+
     public static void Add()
     {
         while (true)
@@ -48,7 +60,7 @@ public static class NutritionalSupplementDisplay
             var healthEffect = HealthEffectDisplay.SelectHealthEffectsId();
 
             Console.WriteLine("Select Purpose:");
-            var purpose = PurposeDisplay.SelectPurposeId();
+            var purpose = PurposeDisplay.SelectPurposesId();
 
             if (IsInputPossible())
             {
@@ -146,6 +158,43 @@ public static class NutritionalSupplementDisplay
         }
     }
 
+    public static void UpdatePurpose()
+    {
+        var supplement = SelectSupplement();
+        
+        Console.WriteLine("Change Purpose ('-' - same, '+' - add, '--', remove):");
+        var purposeChoice = Console.ReadLine().Trim();
+        var purposeId = new List<ObjectId>();
+        var current = supplement.PurposesId.ToList();
+
+        if (purposeChoice != "-")
+        {
+            if (purposeChoice == "+")
+            {
+                Console.WriteLine("Select Purpose:");
+                purposeId = PurposeDisplay.SelectPurposesId();
+
+                foreach (var purId in purposeId)
+                {
+                    if (!current.Exists(id => id == purId))
+                    {
+                        current.Add(purId);
+                    }
+                }
+            }
+            else
+            {
+                var purposeToRemove =
+                    PurposeDisplay.SelectPurposeIdFrom(supplement.Purposes.ToList());
+
+                foreach (var purpose in purposeToRemove) current.Remove(purpose);
+            }
+
+            supplement.PurposesId = current;
+            NutritionalSupplementEditor.Update(supplement);
+        }
+    }
+    
     private static NutritionalSupplement SelectSupplement()
     {
         while (true)
@@ -166,24 +215,23 @@ public static class NutritionalSupplementDisplay
 
     private static void PrintValue(NutritionalSupplement supplement)
     {
-        var str = $"Current value:\n" +
-                  $"    {supplement.Name}\n" +
-                  $"    {supplement.ENum}\n" +
-                  $"    {supplement.Description}\n" +
-                  $"    {supplement.AcceptableDailyIntake}\n";
+        var str = $"{supplement.Name}\n" +
+                  $"{supplement.ENum}\n" +
+                  $"{supplement.Description}\n" +
+                  $"{supplement.AcceptableDailyIntake}\n";
 
-        str += $"   Health effects:\n";
+        str += $"Health effects:\n";
 
         foreach (var healthEffect in supplement.HealthEffects)
         {
-            str += $"       {healthEffect}\n";
+            str += $"{healthEffect}\n";
         }
 
-        str += $"   Purpose\n";
+        str += $"Purpose\n";
 
         foreach (var purpose in supplement.Purposes)
         {
-            str += $"       {purpose}\n";
+            str += $"{purpose}\n";
         }
 
         Console.WriteLine(str);
