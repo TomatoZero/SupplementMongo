@@ -13,4 +13,9 @@ public partial class HealthEffect
     public string Description { get; set; } = null!;
     [BsonIgnore]
     public List<NutritionalSupplement> NutritionalSupplements { get; set; } = new List<NutritionalSupplement>();
+
+    public override string ToString()
+    {
+        return $"{Category} {Description}";
+    }
 }

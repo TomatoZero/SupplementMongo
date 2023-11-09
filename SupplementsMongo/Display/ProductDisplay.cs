@@ -68,9 +68,9 @@ public static class ProductDisplay
             _name = Console.ReadLine();
             var providerId = ProviderDisplay.GetProviderFromList().Id;
 
-            Console.WriteLine("ManufacturingDate ('-' - same):");
+            Console.WriteLine("ManufacturingDate:");
             _manufactoryDate = Console.ReadLine().Trim();
-            Console.WriteLine("ExpirationDate ('-' - same):");
+            Console.WriteLine("ExpirationDate:");
             _expirationDate = Console.ReadLine().Trim();
 
             if (IsInputPossible())

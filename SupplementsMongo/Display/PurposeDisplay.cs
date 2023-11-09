@@ -1,4 +1,5 @@
-﻿using NutritionalSupplements.Data;
+﻿using MongoDB.Bson;
+using NutritionalSupplements.Data;
 using SupplementsMongo.Editors;
 
 namespace SupplementsMongo.Display;
@@ -74,6 +75,35 @@ public class PurposeDisplay
     {
         var provider = SelectProduct();
         PurposeEditor.Remove(provider);
+    }
+
+    public static List<ObjectId> SelectPurposeId()
+    {
+        var purposes = SelectPurposes();
+        return purposes.Select(purpose => purpose.Id).ToList();
+    }
+
+    public static List<Purpose> SelectPurposes()
+    {
+        var healthEffects = new List<Purpose>();
+
+        PrintTable();
+
+        var printedPurposes = Console.ReadLine().Trim().Split();
+
+        foreach (var printedPurpose in printedPurposes)
+        {
+            foreach (var purpose in _current)
+            {
+                if (printedPurpose == purpose.Name)
+                {
+                    healthEffects.Add(purpose);
+                    break;
+                }
+            }
+        }
+
+        return healthEffects;
     }
     
     private static Purpose SelectProduct()

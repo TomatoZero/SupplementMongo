@@ -15,6 +15,11 @@ public static class NutritionalSupplementEditor
     {
         return _repository.GetAll().ToList();
     }
+    
+    public static List<NutritionalSupplement> GetTableInclude()
+    {
+        return _repository.GetAllInclude().ToList();
+    }
 
     public static void Update(NutritionalSupplement supplement)
     {

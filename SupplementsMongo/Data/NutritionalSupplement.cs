@@ -21,4 +21,9 @@ public partial class NutritionalSupplement
 
     [BsonIgnore] public virtual ICollection<HealthEffect> HealthEffects { get; set; } = new List<HealthEffect>();
     [BsonIgnore] public virtual ICollection<Purpose> Purposes { get; set; } = new List<Purpose>();
+
+    public override string ToString()
+    {
+        return $"{Name} {ENum}";
+    }
 }

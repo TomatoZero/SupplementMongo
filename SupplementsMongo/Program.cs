@@ -32,6 +32,6 @@
 
 // HealthEffectDisplay.Add();
 
-PurposeDisplay.Remove();
+NutritionalSupplementDisplay.UpdateHealthEffect();
 
 return;

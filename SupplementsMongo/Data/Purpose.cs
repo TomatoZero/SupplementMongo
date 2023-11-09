@@ -14,4 +14,9 @@ public partial class Purpose
 
     [BsonIgnore]
     public List<NutritionalSupplement> NutritionalSupplements { get; set; } = new List<NutritionalSupplement>();
+
+    public override string ToString()
+    {
+        return $"{Name} {Description}";
+    }
 }
