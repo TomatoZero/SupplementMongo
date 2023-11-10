@@ -234,6 +234,53 @@ public static class NutritionalSupplementDisplay
             Console.WriteLine($"Error: Wrong Input. Select again");
         }
     }
+    
+    public static List<ObjectId> SelectSupplementsId()
+    {
+        var healthEffects = SelectHealthEffects();
+        return healthEffects.Select(effect => effect.Id).ToList();
+    }
+    
+    public static List<ObjectId> SelectSupplementsIdFrom(List<NutritionalSupplement> selectFrom)
+    {
+        var effectsFrom = SelectSupplementsFrom(selectFrom);
+        return effectsFrom.Select(healthEffect => healthEffect.Id).ToList();
+    }
+
+    public static List<NutritionalSupplement> SelectHealthEffects()
+    {
+        _currentSupplements = NutritionalSupplementEditor.GetTable();
+        return SelectSupplementsFrom(_currentSupplements);
+    }
+    
+    public static List<NutritionalSupplement> SelectSupplementsFrom(List<NutritionalSupplement> selectFrom)
+    {
+        var str = "Select from:\n";
+        foreach (var supplement in selectFrom)
+        {
+            str += $"   {supplement.Name}\n";
+        }
+        Console.WriteLine(str);
+        
+        var supplements = new List<NutritionalSupplement>();
+
+        Console.WriteLine("Print for select (, - separator)");
+        var printedSupplements = Console.ReadLine().Trim().Split(',');
+
+        foreach (var printedSupplement in printedSupplements)
+        {
+            foreach (var supplement in selectFrom)
+            {
+                if (printedSupplement == supplement.Name)
+                {
+                    supplements.Add(supplement);
+                    break;
+                }
+            }
+        }
+
+        return supplements;
+    }
 
     private static void PrintValue(NutritionalSupplement supplement)
     {
