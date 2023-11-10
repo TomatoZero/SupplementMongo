@@ -26,14 +26,6 @@ public static class ProviderEditors
     {
         return _repository.GetById(id);
     }
-    
-    public static void Update(Provider provider, Provider newValue)
-    {
-        provider.Name = newValue.Name;
-        provider.RegistrationCountry = newValue.RegistrationCountry;
-
-        _repository.Update(provider);
-    }
 
     public static void Update(Provider provider)
     {

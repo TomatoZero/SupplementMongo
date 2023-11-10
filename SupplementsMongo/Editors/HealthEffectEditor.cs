@@ -17,14 +17,6 @@ public class HealthEffectEditor
     {
         return _repository.GetAll().ToList();
     }
-
-    public static void Update(HealthEffect purpose, HealthEffect newValue)
-    {
-        purpose.Category = newValue.Category;
-        purpose.Description = newValue.Description;
-        
-        _repository.Update(purpose);
-    }
     
     public static void Update(HealthEffect purpose)
     {

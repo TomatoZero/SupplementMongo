@@ -16,17 +16,6 @@ public static class ProductEditor
         return _repository.GetAllInclude().ToList();
     }
 
-    public static void Update(Product product, Product newValue)
-    {
-        product.Name = newValue.Name;
-        product.ProviderId = newValue.ProviderId;
-        product.IngredientsId = newValue.IngredientsId;
-        product.ExpirationDate = newValue.ExpirationDate;
-        product.ManufacturingDate = newValue.ManufacturingDate;
-
-        _repository.Update(product);
-    }
-
     public static void Update(Product product)
     {
         _repository.Update(product);

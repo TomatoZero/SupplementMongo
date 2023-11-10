@@ -17,14 +17,6 @@ public static class PurposeEditor
         return _repository.GetAll().ToList();
     }
 
-    public static void Update(Purpose purpose, Purpose newValue)
-    {
-        purpose.Name = newValue.Name;
-        purpose.Description = newValue.Description;
-        
-        _repository.Update(purpose);
-    }
-
     public static void Update(Purpose purpose)
     {
         _repository.Update(purpose);
