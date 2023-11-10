@@ -86,6 +86,12 @@ public static class NutritionalSupplementDisplay
         }
     }
 
+    public static void Remove()
+    {
+        var supplement = SelectSupplement();
+        NutritionalSupplementEditor.Remove(supplement);
+    }
+    
     public static void Update()
     {
         var supplement = SelectSupplement();

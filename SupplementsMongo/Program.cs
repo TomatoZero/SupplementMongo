@@ -7,13 +7,18 @@ while (true)
                       $"2. Show full table\n" +
                       $"3. Add value\n" +
                       $"4. Remove value\n" +
-                      $"5. Update value");
+                      $"5. Update value\n" +
+                      $"6. Update reference");
     
     var input = Console.ReadLine().Trim();
     switch (input)
     {
         case "1": ShowBriefTable(); break;
         case "2": ShowFullTable(); break;
+        case "3": AddValue(); break;
+        case "4": RemoveValue(); break;
+        case "5": UpdateValue(); break;
+        case "6": UpdateReference(); break;
         default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
     }
 }
@@ -52,38 +57,124 @@ return;
 
 void ShowBriefTable()
 {
-    Console.Clear();
-    var input = SelectTable();
-
-    switch(input)
+    while (true)
     {
-        case "1": ProviderDisplay.PrintTable(); break;
-        case "2": ProductDisplay.PrintTable(); break;
-        // case "3": ProviderDisplay.PrintTable(); break;
-        case "4": NutritionalSupplementDisplay.PrintTable(); break;
-        case "5": HealthEffectDisplay.PrintTable(); break;
-        case "6": ProductDisplay.PrintTable(); break;
-        default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        Console.Clear();
+        var input = SelectTable();
+
+        switch(input)
+        {
+            case "1": ProviderDisplay.PrintTable(); return;
+            case "2": ProductDisplay.PrintTable(); return;
+            // case "3": ProviderDisplay.PrintTable(); return;
+            case "4": NutritionalSupplementDisplay.PrintTable(); return;
+            case "5": HealthEffectDisplay.PrintTable(); return;
+            case "6": ProductDisplay.PrintTable(); return;
+            default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        }
     }
+    
 }
 
 void ShowFullTable()
 {
-    Console.Clear();
-    var input = SelectTable();
-
-    switch(input)
+    while (true)
     {
-        case "1": ProviderDisplay.PrintTable(); break;
-        case "2": ProductDisplay.PrintFullTable(); break;
-        // case "3": ProviderDisplay.PrintTable(); break;
-        case "4": NutritionalSupplementDisplay.PrintFullTable(); break;
-        case "5": HealthEffectDisplay.PrintTable(); break;
-        case "6": ProductDisplay.PrintTable(); break;
-        default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        Console.Clear();
+        var input = SelectTable();
+
+        switch(input)
+        {
+            case "1": ProviderDisplay.PrintTable(); return;
+            case "2": ProductDisplay.PrintFullTable(); return;
+            // case "3": ProviderDisplay.PrintTable(); break;
+            case "4": NutritionalSupplementDisplay.PrintFullTable(); return;
+            case "5": HealthEffectDisplay.PrintTable(); return;
+            case "6": ProductDisplay.PrintTable(); return;
+            default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        }
+    }
+    
+}
+
+void AddValue()
+{
+    while (true)
+    {
+        Console.Clear();
+        var input = SelectTable();
+        
+        switch(input)
+        {
+            case "1": ProviderDisplay.Add(); return;
+            case "2": ProductDisplay.Add(); return;
+            // case "3": ProviderDisplay.Add(); break;
+            case "4": NutritionalSupplementDisplay.Add(); return;
+            case "5": HealthEffectDisplay.Add(); return;
+            case "6": ProductDisplay.Add(); return;
+            default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        }
+    }
+    
+}
+
+void RemoveValue()
+{
+    while (true)
+    {
+        Console.Clear();
+        var input = SelectTable();
+        
+        switch(input)
+        {
+            case "1": ProviderDisplay.Remove(); return;
+            case "2": ProductDisplay.Remove(); return;
+            // case "3": ProviderDisplay.Remove(); return;
+            case "4": NutritionalSupplementDisplay.Remove(); return;
+            case "5": HealthEffectDisplay.Remove(); return;
+            case "6": ProductDisplay.Remove(); return;
+            default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        }
+    }
+    
+}
+
+void UpdateValue()
+{
+    while (true)
+    {
+        Console.Clear();
+        var input = SelectTable();
+        
+        switch(input)
+        {
+            case "1": ProviderDisplay.Update(); return;
+            case "2": ProductDisplay.Update(); return;
+            // case "3": ProviderDisplay.Update(); return;
+            case "4": NutritionalSupplementDisplay.Update(); return;
+            case "5": HealthEffectDisplay.Update(); return;
+            case "6": ProductDisplay.Update(); return;
+            default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        }
     }
 }
 
+void UpdateReference()
+{
+    while (true)
+    {
+        Console.Clear();
+        var input = SelectTable();
+        
+        switch(input)
+        {
+            case "1": ProductDisplay.Update(); return;
+            // case "2": ProviderDisplay.Update(); break;
+            case "3": NutritionalSupplementDisplay.Update(); return;
+            default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
+        }
+    }
+}
 
 string SelectTable()
 {
