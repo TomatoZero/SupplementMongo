@@ -119,6 +119,53 @@ public static class IngredientDisplay
         }
     }
 
+    public static List<ObjectId> SelectIngredientId()
+    {
+        var healthEffects = SelectIngredients();
+        return healthEffects.Select(effect => effect.Id).ToList();
+    }
+    
+    public static List<ObjectId> SelectIngredientsIdFrom(List<Ingredient> selectFrom)
+    {
+        var ingredientFrom = SelectIngredientsFrom(selectFrom);
+        return ingredientFrom.Select(healthEffect => healthEffect.Id).ToList();
+    }
+
+    public static List<Ingredient> SelectIngredients()
+    {
+        _current = IngredientEditor.GetTable();
+        return SelectIngredientsFrom(_current);
+    }
+    
+    public static List<Ingredient> SelectIngredientsFrom(List<Ingredient> selectFrom)
+    {
+        var str = "Select from:\n";
+        foreach (var ingredient in selectFrom)
+        {
+            str += $"   {ingredient.Name}\n";
+        }
+        Console.WriteLine(str);
+        
+        var supplements = new List<Ingredient>();
+
+        Console.WriteLine("Print for select (, - separator)");
+        var printedIngredients = Console.ReadLine().Trim().Split(',');
+
+        foreach (var printedIngredient in printedIngredients)
+        {
+            foreach (var ingredient in selectFrom)
+            {
+                if (printedIngredient == ingredient.Name)
+                {
+                    supplements.Add(ingredient);
+                    break;
+                }
+            }
+        }
+
+        return supplements;
+    }
+    
     private static void PrintValue(Ingredient ingredient)
     {
         var str = $"{ingredient.Name}\n" +

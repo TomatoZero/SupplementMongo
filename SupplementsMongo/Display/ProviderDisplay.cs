@@ -89,7 +89,7 @@ public class ProviderDisplay
         ProviderEditors.Remove(provider);
     }
 
-    private static Provider SelectProvider()
+    public static Provider SelectProvider()
     {
         while (true)
         {

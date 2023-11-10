@@ -4,7 +4,7 @@ using SupplementsMongo.Display;
 
 namespace SupplementsMongo.Editors;
 
-public class HealthEffectEditor
+public static class HealthEffectEditor
 {
     private static HealthEffectRepository _repository;
 

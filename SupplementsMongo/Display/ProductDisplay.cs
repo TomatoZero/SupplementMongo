@@ -1,4 +1,5 @@
-﻿using NutritionalSupplements.Data;
+﻿using MongoDB.Bson;
+using NutritionalSupplements.Data;
 using SupplementsMongo.Editors;
 
 namespace SupplementsMongo.Display;
@@ -73,14 +74,73 @@ public static class ProductDisplay
         ProductEditor.Update(product);
     }
 
+    public static void UpdateReference()
+    {
+        Console.WriteLine($"Update\n" +
+                          $"1. Provider\n" +
+                          $"2. Ingredients");
+
+        var input = Console.ReadLine().Trim();
+
+        switch (input)
+        {
+            case "1": UpdateProvider(); break;
+            case "2": UpdateIngredients(); break;
+            default: break;
+        }
+    }
+    
     public static void UpdateProvider()
     {
+        var product = SelectProduct();
         
+        Console.WriteLine("Change Provider ('-' - same, '+' - change):");
+        var providerChoice = Console.ReadLine().Trim();
+
+        if (providerChoice == "+")
+        {
+            Console.WriteLine("Select provider");
+            var provider = ProviderDisplay.SelectProvider().Id;
+            product.ProviderId = provider;
+            ProductEditor.Update(product);
+        }
     }
 
     public static void UpdateIngredients()
     {
+        var product = SelectProduct();
         
+        Console.WriteLine("Change Ingredients ('-' - same, '+' - add, '--', remove):");
+        var ingredientsChoice = Console.ReadLine().Trim();
+        var ingredients = new List<ObjectId>();
+        var current = product.IngredientsId.ToList();
+
+        if (ingredientsChoice != "-")
+        {
+            if (ingredientsChoice == "+")
+            {
+                Console.WriteLine("Select Ingredients:");
+                ingredients = IngredientDisplay.SelectIngredientId();
+
+                foreach (var objectId in ingredients)
+                {
+                    if (!current.Exists(id => id == objectId))
+                    {
+                        current.Add(objectId);
+                    }
+                }
+            }
+            else
+            {
+                var healthEffectToRemove =
+                    IngredientDisplay.SelectIngredientsIdFrom(product.Ingredients.ToList());
+
+                foreach (var effect in healthEffectToRemove) current.Remove(effect);
+            }
+
+            product.IngredientsId = current;
+            ProductEditor.Update(product);
+        }
     }
     
     public static void Add()

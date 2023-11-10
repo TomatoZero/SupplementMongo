@@ -150,13 +150,13 @@ public static class NutritionalSupplementDisplay
         var supplement = SelectSupplement();
 
         Console.WriteLine("Change Health Effects ('-' - same, '+' - add, '--', remove):");
-        var healthEffectChoise = Console.ReadLine().Trim();
+        var healthEffectChoice = Console.ReadLine().Trim();
         var healthEffect = new List<ObjectId>();
         var current = supplement.HealthEffectsId.ToList();
 
-        if (healthEffectChoise != "-")
+        if (healthEffectChoice != "-")
         {
-            if (healthEffectChoise == "+")
+            if (healthEffectChoice == "+")
             {
                 Console.WriteLine("Select Health Effect:");
                 healthEffect = HealthEffectDisplay.SelectHealthEffectsId();
