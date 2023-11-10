@@ -1,4 +1,5 @@
-﻿using NutritionalSupplements.Data;
+﻿using MongoDB.Bson;
+using NutritionalSupplements.Data;
 
 namespace SupplementsMongo.Editors;
 
@@ -36,6 +37,26 @@ public static class PurposeEditor
 
     public static void Remove(Purpose purpose)
     {
+        RemoveReferenceFromNutritionalSupplement(purpose.Id);
         _repository.Delete(purpose.Id);
+    }
+    
+    private static void RemoveReferenceFromNutritionalSupplement(ObjectId id)
+    {
+        var supplements = NutritionalSupplementEditor.GetTable();
+        var isInSupplement = false;
+        
+        foreach (var supplement in supplements)
+        {
+            if (supplement.PurposesId.Any(objectId => objectId == id))
+            {
+                isInSupplement = true;
+            }
+
+            if (!isInSupplement) continue;
+            supplement.PurposesId.Remove(id);
+            NutritionalSupplementEditor.Update(supplement);
+        }
+
     }
 }

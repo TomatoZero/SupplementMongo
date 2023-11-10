@@ -2,6 +2,10 @@
 
 while (true)
 {
+    Console.WriteLine("Print something to start");
+    Console.ReadLine();
+    
+    Console.Clear();
     Console.WriteLine($"Choose Action (Number):\n" +
                       $"1. Show brief table\n" +
                       $"2. Show full table\n" +
@@ -11,6 +15,7 @@ while (true)
                       $"6. Update reference");
     
     var input = Console.ReadLine().Trim();
+    Console.Clear();
     switch (input)
     {
         case "1": ShowBriefTable(); break;
@@ -111,7 +116,7 @@ void AddValue()
             // case "3": ProviderDisplay.Add(); break;
             case "4": NutritionalSupplementDisplay.Add(); return;
             case "5": HealthEffectDisplay.Add(); return;
-            case "6": ProductDisplay.Add(); return;
+            case "6": PurposeDisplay.Add(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
     }
@@ -163,14 +168,13 @@ void UpdateReference()
 {
     while (true)
     {
-        Console.Clear();
-        var input = SelectTable();
+        var input = SelectTableSmall();
         
         switch(input)
         {
             case "1": ProductDisplay.Update(); return;
             // case "2": ProviderDisplay.Update(); break;
-            case "3": NutritionalSupplementDisplay.Update(); return;
+            case "3": NutritionalSupplementDisplay.UpdateReference(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
     }
@@ -187,5 +191,18 @@ string SelectTable()
                       " 6. Purpose");
 
     var input = Console.ReadLine().Trim();
+    Console.Clear();
+    return input;
+}
+
+string SelectTableSmall()
+{
+    Console.WriteLine("Choose Table (Number):\n" +
+                      " 1. Product\n" +
+                      // " 2. Ingredient\n" +
+                      " 3. Nutritional Supplement\n");
+
+    var input = Console.ReadLine().Trim();
+    Console.Clear();
     return input;
 }

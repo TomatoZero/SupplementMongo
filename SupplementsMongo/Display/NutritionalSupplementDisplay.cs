@@ -127,6 +127,22 @@ public static class NutritionalSupplementDisplay
         }
     }
 
+    public static void UpdateReference()
+    {
+        Console.WriteLine($"Update\n" +
+                          $"1. Health Effect\n" +
+                          $"2. Purpose");
+
+        var input = Console.ReadLine().Trim();
+
+        switch (input)
+        {
+            case "1": UpdateHealthEffect(); break;
+            case "2": UpdatePurpose(); break;
+            default: break;
+        }
+    }
+    
     public static void UpdateHealthEffect()
     {
         var supplement = SelectSupplement();
