@@ -32,15 +32,22 @@ public class HealthEffectDisplay
                           $"    {healthEffect.Category}\n" +
                           $"    {healthEffect.Description}");
 
-        Console.WriteLine("New Category ('-' - same):");
-        _category = Console.ReadLine();
+        Console.WriteLine($"Update Health Effect:\n");
+        
+        Console.WriteLine("Category ('-' - same):");
+        _category = Console.ReadLine().Trim();
+        
         Console.WriteLine("Description ('-' - same):");
         _description = Console.ReadLine().Trim();
 
-        if (_category != "-") healthEffect.Category = _category;
-        if (_description != "-") healthEffect.Description = _description;
+        if (IsInputPossible())
+        {
+            CheckInput(healthEffect);
 
-        HealthEffectEditor.Update(healthEffect);
+            healthEffect.Category = _category;
+            healthEffect.Description = _description;
+            HealthEffectEditor.Update(healthEffect);
+        }
     }
 
     public static void Add()
@@ -150,5 +157,11 @@ public class HealthEffectDisplay
     private static bool IsInputPossible(string str)
     {
         return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+    }
+    
+    private static void CheckInput(HealthEffect supplement)
+    {
+        if (_category == "-") _category = supplement.Category;
+        if (_description == "-") _description = supplement.Description;
     }
 }

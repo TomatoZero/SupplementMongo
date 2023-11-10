@@ -7,6 +7,9 @@ public class ProviderDisplay
 {
     private static List<Provider> _currentProviders;
 
+    private static string _name;
+    private static string _registrationCountry;
+    
     public static void PrintTable()
     {
         _currentProviders = ProviderEditors.GetTable();
@@ -37,19 +40,19 @@ public class ProviderDisplay
 
         Console.WriteLine("New Name ('-' - same):");
         var newName = Console.ReadLine();
+        
         Console.WriteLine("New RegistrationCountry ('-' - same):");
         var newRegistrationCountry = Console.ReadLine();
 
-        if (newName != "-") provider.Name = newName;
-        if (newRegistrationCountry != "-") provider.RegistrationCountry = newRegistrationCountry;
-
-        var newProviderValue = new Provider()
+        if(IsInputPossible())
         {
-            Name = newName,
-            RegistrationCountry = newRegistrationCountry
-        };
-
-        ProviderEditors.Update(provider, newProviderValue);
+            CheckInput(provider);
+            
+            provider.Name = newName;
+            provider.RegistrationCountry = newRegistrationCountry;
+            
+            ProviderEditors.Update(provider);
+        }
     }
 
     public static void Add()
@@ -63,7 +66,7 @@ public class ProviderDisplay
             Console.WriteLine("RegistrationCountry:");
             var newRegistrationCountry = Console.ReadLine();
 
-            if (IsInputPossible(newName, newRegistrationCountry))
+            if (IsInputPossible())
             {
                 var provider = new Provider
                 {
@@ -104,9 +107,20 @@ public class ProviderDisplay
         }
     }
 
-    private static bool IsInputPossible(string name, string country)
+    
+    private static bool IsInputPossible()
     {
-        return !string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name) && !string.IsNullOrEmpty(country) &&
-               !string.IsNullOrWhiteSpace(country);
+        return IsInputPossible(_name) & IsInputPossible(_registrationCountry);
+    }
+
+    private static bool IsInputPossible(string str)
+    {
+        return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+    }
+    
+    private static void CheckInput(Provider provider)
+    {
+        if (_name == "-") _name = provider.Name;
+        if (_registrationCountry == "-") _registrationCountry = provider.RegistrationCountry;
     }
 }

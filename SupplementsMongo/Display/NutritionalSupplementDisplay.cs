@@ -101,7 +101,7 @@ public static class NutritionalSupplementDisplay
         Console.WriteLine($"Update Nutritional Supplement:\n");
 
         Console.WriteLine("Name ('-' - same):");
-        _name = Console.ReadLine();
+        _name = Console.ReadLine().Trim();
 
         Console.WriteLine("Enum ('-' - same):");
         _enum = Console.ReadLine().Trim();
@@ -114,6 +114,8 @@ public static class NutritionalSupplementDisplay
         
         if (IsInputPossible())
         {
+            CheckInput(supplement);
+            
             if (Decimal.TryParse(_acceptableDailyIntake, out var daily))
             {
                 supplement.Name = _name;
@@ -311,9 +313,17 @@ public static class NutritionalSupplementDisplay
         return IsInputPossible(_name) & IsInputPossible(_enum) & IsInputPossible(_description) &
                IsInputPossible(_acceptableDailyIntake);
     }
-
+    
     private static bool IsInputPossible(string str)
     {
         return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+    }
+
+    private static void CheckInput(NutritionalSupplement supplement)
+    {
+        if (_name == "-") _name = supplement.Name;
+        if (_enum == "-") _enum = supplement.ENum;
+        if (_description == "-") _description = supplement.Description;
+        if (_acceptableDailyIntake == "-") _acceptableDailyIntake = supplement.AcceptableDailyIntake.ToString();
     }
 }

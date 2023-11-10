@@ -35,6 +35,11 @@ public static class ProviderEditors
         _repository.Update(provider);
     }
 
+    public static void Update(Provider provider)
+    {
+        _repository.Update(provider);
+    }
+
     public static void Add(Provider provider)
     {
         _repository.Add(provider);

@@ -32,15 +32,22 @@ public class PurposeDisplay
                           $"    {purpose.Name}\n" +
                           $"    {purpose.Description}");
 
-        Console.WriteLine("New Name ('-' - same):");
+        Console.WriteLine($"Update Purpose:\n");
+        
+        Console.WriteLine("Name ('-' - same):");
         var newName = Console.ReadLine();
+        
         Console.WriteLine("Description ('-' - same):");
         var description = Console.ReadLine().Trim();
-        
-        if (newName != "-") purpose.Name = newName;
-        if (description != "-") purpose.Description = description;
-        
-        PurposeEditor.Update(purpose);
+
+        if (IsInputPossible())
+        {
+            CheckInput(purpose);
+            
+            purpose.Name = newName;
+            purpose.Description = description;
+            PurposeEditor.Update(purpose);
+        }
     }
 
     public static void Add()
@@ -150,5 +157,11 @@ public class PurposeDisplay
     private static bool IsInputPossible(string str)
     {
         return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+    }
+    
+    private static void CheckInput(Purpose supplement)
+    {
+        if (_name == "-") _name = supplement.Name;
+        if (_description == "-") _description = supplement.Description;
     }
 }

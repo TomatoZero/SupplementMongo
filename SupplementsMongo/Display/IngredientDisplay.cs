@@ -91,6 +91,8 @@ public static class IngredientDisplay
 
         if (IsInputPossible())
         {
+            CheckInput(ingredient);
+            
             ingredient.Name = _name;
             ingredient.IngredientSource = _source;
             
@@ -177,5 +179,11 @@ public static class IngredientDisplay
     private static bool IsInputPossible(string str)
     {
         return !string.IsNullOrEmpty(str) && !string.IsNullOrWhiteSpace(str);
+    }
+    
+    private static void CheckInput(Ingredient ingredient)
+    {
+        if (_name == "-") _name = ingredient.Name;
+        if (_source == "-") _source = ingredient.IngredientSource;
     }
 }

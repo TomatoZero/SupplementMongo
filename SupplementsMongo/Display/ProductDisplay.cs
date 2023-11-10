@@ -15,6 +15,12 @@ public static class ProductDisplay
     {
         _currentProduct = ProductEditor.GetTable();
 
+        if (_currentProduct.Count == 0)
+        {
+            Console.WriteLine("Table is empty");
+            return;
+        }
+        
         var str = "Products:\n";
         foreach (var product in _currentProduct)
         {
@@ -28,7 +34,13 @@ public static class ProductDisplay
     {
         _currentProduct = ProductEditor.GetTable();
 
-        Console.WriteLine("Products");
+        if (_currentProduct.Count == 0)
+        {
+            Console.WriteLine("Table is empty");
+            return;
+        }
+        
+        Console.WriteLine("Products:");
         foreach (var product in _currentProduct)
         {
             PrintValue(product);
@@ -44,24 +56,15 @@ public static class ProductDisplay
                           $"    {product.Name}\n" +
                           $"    {ProviderEditors.GetById(product.ProviderId)}" +
                           $"    {product.ManufacturingDate}\n" +
-                          $"    {product.ExpirationDate}\n" +
-                          $"    Print Ingredients");
+                          $"    {product.ExpirationDate}\n");
 
-        //TODO: print ingredients
-        
         Console.WriteLine("New Name ('-' - same):");
         var newName = Console.ReadLine();
-        Console.WriteLine("Select New Provider ('-' - no, '+' - yes):");
-        var change = Console.ReadLine().Trim();
-
-        if (change == "+") product.ProviderId = ProviderDisplay.GetProviderFromList().Id;
-
+        
         Console.WriteLine("ManufacturingDate ('-' - same):");
         var manufacturingDate = Console.ReadLine().Trim();
         Console.WriteLine("ExpirationDate ('-' - same):");
         var expirationDate = Console.ReadLine().Trim();
-        
-        //TODO: ingredients
         
         if (newName != "-") product.Name = newName;
         if (manufacturingDate != "-") product.ManufacturingDate = DateTime.Parse(manufacturingDate);
@@ -70,6 +73,16 @@ public static class ProductDisplay
         ProductEditor.Update(product);
     }
 
+    public static void UpdateProvider()
+    {
+        
+    }
+
+    public static void UpdateIngredients()
+    {
+        
+    }
+    
     public static void Add()
     {
         while (true)

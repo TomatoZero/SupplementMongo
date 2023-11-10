@@ -74,7 +74,7 @@ void ShowBriefTable()
             case "3": IngredientDisplay.PrintTable(); return;
             case "4": NutritionalSupplementDisplay.PrintTable(); return;
             case "5": HealthEffectDisplay.PrintTable(); return;
-            case "6": ProductDisplay.PrintTable(); return;
+            case "6": PurposeDisplay.PrintTable(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
     }
@@ -95,7 +95,7 @@ void ShowFullTable()
             case "3": IngredientDisplay.PrintFullTable(); return;
             case "4": NutritionalSupplementDisplay.PrintFullTable(); return;
             case "5": HealthEffectDisplay.PrintTable(); return;
-            case "6": ProductDisplay.PrintTable(); return;
+            case "6": PurposeDisplay.PrintTable(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
     }
@@ -137,7 +137,7 @@ void RemoveValue()
             case "3": IngredientDisplay.Remove(); return;
             case "4": NutritionalSupplementDisplay.Remove(); return;
             case "5": HealthEffectDisplay.Remove(); return;
-            case "6": ProductDisplay.Remove(); return;
+            case "6": PurposeDisplay.Remove(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
     }
@@ -158,7 +158,7 @@ void UpdateValue()
             case "3": IngredientDisplay.Update(); return;
             case "4": NutritionalSupplementDisplay.Update(); return;
             case "5": HealthEffectDisplay.Update(); return;
-            case "6": ProductDisplay.Update(); return;
+            case "6": PurposeDisplay.Update(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
     }
@@ -173,7 +173,7 @@ void UpdateReference()
         switch(input)
         {
             case "1": ProductDisplay.Update(); return;
-            case "2": IngredientDisplay.Update(); return;
+            case "2": IngredientDisplay.UpdateNutritionalSupplements(); return;
             case "3": NutritionalSupplementDisplay.UpdateReference(); return;
             default: Console.Clear(); Console.WriteLine("Wrong input try again:"); break;
         }
