@@ -55,7 +55,7 @@ public static class ProductDisplay
         
         Console.WriteLine($"Current value:\n" +
                           $"    {product.Name}\n" +
-                          $"    {ProviderEditors.GetById(product.ProviderId)}" +
+                          $"    {ProviderEditors.GetById(product.ProviderId).Name}" +
                           $"    {product.ManufacturingDate}\n" +
                           $"    {product.ExpirationDate}\n");
 
@@ -153,23 +153,27 @@ public static class ProductDisplay
             _name = Console.ReadLine();
             var providerId = ProviderDisplay.GetProviderFromList().Id;
 
-            Console.WriteLine("ManufacturingDate:");
+            Console.WriteLine("ManufacturingDate (yyyy-mm-dd):");
             _manufactoryDate = Console.ReadLine().Trim();
-            Console.WriteLine("ExpirationDate:");
+            Console.WriteLine("ExpirationDate (yyyy-mm-dd):");
             _expirationDate = Console.ReadLine().Trim();
 
             if (IsInputPossible())
             {
-                var provider = new Product()
+                if (DateTime.TryParse(_manufactoryDate, out var manufacturing) &&
+                    DateTime.TryParse(_expirationDate, out var expiration))
                 {
-                    Name = _name,
-                    ProviderId = providerId,
-                    ManufacturingDate = DateTime.Parse(_manufactoryDate),
-                    ExpirationDate = DateTime.Parse(_expirationDate)
-                };
-                
-                ProductEditor.Add(provider);
-                return;
+                    var provider = new Product()
+                    {
+                        Name = _name,
+                        ProviderId = providerId,
+                        ManufacturingDate = manufacturing,
+                        ExpirationDate = expiration
+                    };
+
+                    ProductEditor.Add(provider);
+                    return;
+                }
             }
             
             Console.Clear();
@@ -216,7 +220,7 @@ public static class ProductDisplay
         var str = $"{product.Name}\n" +
                   $"{product.ManufacturingDate}\n" +
                   $"{product.ExpirationDate}\n" +
-                  $"{product.Provider}\n";
+                  $"{product.Provider.Name}\n";
 
         str += $"Ingredients:\n";
 

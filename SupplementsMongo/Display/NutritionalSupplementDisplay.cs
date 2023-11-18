@@ -273,7 +273,7 @@ public static class NutritionalSupplementDisplay
         {
             foreach (var supplement in selectFrom)
             {
-                if (printedSupplement == supplement.Name)
+                if (printedSupplement.Trim() == supplement.Name)
                 {
                     supplements.Add(supplement);
                     break;

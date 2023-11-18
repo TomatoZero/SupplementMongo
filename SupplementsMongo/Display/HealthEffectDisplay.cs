@@ -138,7 +138,7 @@ public class HealthEffectDisplay
         {
             foreach (var healthEffect in selectFrom)
             {
-                if (printedEffect == healthEffect.Category)
+                if (printedEffect.Trim() == healthEffect.Category)
                 {
                     healthEffects.Add(healthEffect);
                     break;

@@ -62,16 +62,16 @@ public class ProviderDisplay
             Console.WriteLine($"New provider:\n");
 
             Console.WriteLine("Name:");
-            var newName = Console.ReadLine();
+            _name = Console.ReadLine();
             Console.WriteLine("RegistrationCountry:");
-            var newRegistrationCountry = Console.ReadLine();
+            _registrationCountry = Console.ReadLine();
 
             if (IsInputPossible())
             {
                 var provider = new Provider
                 {
-                    Name = newName,
-                    RegistrationCountry = newRegistrationCountry
+                    Name = _name,
+                    RegistrationCountry = _registrationCountry
                 };
 
                 ProviderEditors.Add(provider);

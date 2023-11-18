@@ -120,11 +120,14 @@ public class ProductRepository : IProductRepository
 
     private void SetRelatedSupplements(Product purpose)
     {
-        var supplementRepository = new IngredientRepository();
+        var ingredientRepository = new IngredientRepository();
         foreach (var id in purpose.IngredientsId)
         {
-            var supplement = supplementRepository.GetById(id);
-            purpose.Ingredients.Add(supplement);
+            var ingredient = ingredientRepository.GetById(id);
+            purpose.Ingredients.Add(ingredient);
         }
+
+        var providerRepository = new ProviderRepository();
+        purpose.Provider = providerRepository.GetById(purpose.ProviderId);
     }
 }

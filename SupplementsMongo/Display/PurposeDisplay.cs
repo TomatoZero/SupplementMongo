@@ -120,7 +120,7 @@ public class PurposeDisplay
         {
             foreach (var healthEffect in selectFrom)
             {
-                if (printedEffect == healthEffect.Name)
+                if (printedEffect.Trim() == healthEffect.Name)
                 {
                     healthEffects.Add(healthEffect);
                     break;

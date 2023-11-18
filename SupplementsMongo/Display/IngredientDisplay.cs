@@ -155,7 +155,7 @@ public static class IngredientDisplay
         {
             foreach (var ingredient in selectFrom)
             {
-                if (printedIngredient == ingredient.Name)
+                if (printedIngredient.Trim() == ingredient.Name)
                 {
                     supplements.Add(ingredient);
                     break;

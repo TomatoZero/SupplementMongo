@@ -118,7 +118,7 @@ public class IngredientRepository : IIngredientRepository
         var update = Builders<BsonDocument>.Update
             .Set("IngredientSource", ingredient.IngredientSource)
             .Set("Name", ingredient.Name)
-            .Set("NutritionalSupplementId", ingredient.NutritionalSupplementsId);
+            .Set("NutritionalSupplementsId", ingredient.NutritionalSupplementsId);
         
         var result = _collection.UpdateOne(filter, update);
         if (result.ModifiedCount > 0)
